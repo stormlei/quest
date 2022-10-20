@@ -1,0 +1,20 @@
+{
+  "siteName": "学生健康监测数据采集与分析系统",
+  "primaryColor": "#247CB7",
+  "planTypeKeys": [
+    "Vision",
+    "CommonDisease",
+    "Checkup"
+  ],
+  "commonServiceEndpoint": "https://commservice.qingpai365.com",
+  "sickness": true,
+  "sample": true,
+  "exportEPIData": true,
+  "checkExportClearIdcard": false,
+  "provinceRetest": true,
+  "zjcdc": true,
+  "timeout": true,
+  "activatePlan": true,
+  "parentSickness": true,
+  "latestArea": true
+}
