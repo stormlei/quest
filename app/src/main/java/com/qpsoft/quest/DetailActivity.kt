@@ -20,10 +20,6 @@ import com.qpsoft.quest.entity.Quest
 import com.qpsoft.quest.util.GzipUtil.gzip
 import org.json.JSONArray
 import org.json.JSONObject
-import java.io.ByteArrayOutputStream
-import java.nio.charset.StandardCharsets.UTF_8
-import java.util.*
-import java.util.zip.GZIPOutputStream
 
 class DetailActivity : AppCompatActivity() {
 
@@ -87,7 +83,7 @@ class DetailActivity : AppCompatActivity() {
         val qrCodeIv = rootView.findViewById<ImageView>(R.id.iv_qrcode)
         LogUtils.e("--------$quest")
         //val qrCodeBitMap = CodeUtils.createQRCode(GsonUtils.toJson(quest.toString()), 1000, null)
-        val qrCodeBitMap = CodeUtils.createQRCode(EncodeUtils.base64Encode2String(gzip(quest.toString())), 720, null)
+        val qrCodeBitMap = CodeUtils.createQRCode(EncodeUtils.base64Encode2String(gzip(GsonUtils.toJson(quest))), 720, null)
         qrCodeIv.setImageBitmap(qrCodeBitMap)
 
         val txt1Tv = rootView.findViewById<TextView>(R.id.tv_txt1)
