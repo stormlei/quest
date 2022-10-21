@@ -8,12 +8,10 @@ import androidx.core.widget.addTextChangedListener
 import com.blankj.utilcode.util.*
 import com.qpsoft.quest.autoupdate.UpdateManager
 import com.qpsoft.quest.config.Keys
-import com.qpsoft.quest.entity.AppVersion
-import com.qpsoft.quest.entity.Result
+import com.qpsoft.quest.entity.Respon
 import java.io.IOException
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import org.json.JSONObject
 
 
 class SettingActivity : AppCompatActivity() {
@@ -63,15 +61,16 @@ class SettingActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             val versionCode = AppUtils.getAppVersionCode()
-            val packageName = AppUtils.getAppPackageName()
+            //val packageName = AppUtils.getAppPackageName()
+            val packageName = "com.a.b"
             Thread {
-                val result = run("https://central.qpsc365.com/api/public/v1/app/version/latest?package=$packageName&versionCode=$versionCode")
-                LogUtils.e("-----$result")
+                val res = run("https://central.qpsc365.com/api/public/v1/app/version/latest?package=$packageName&versionCode=$versionCode")
+                LogUtils.e("-----$res")
                 runOnUiThread {
-                    val result = GsonUtils.fromJson(result, Result::class.java)
-                    if (result.code == 0) {
-                        val appVersion = result.data
-                        UpdateManager(this, appVersion).checkUpdate()
+                    val respon = GsonUtils.fromJson(res, Respon::class.java)
+                    if (respon.code == 0) {
+                        val appVersion = respon.data
+                        if (appVersion != null )UpdateManager(this, appVersion).checkUpdate()
                     }
                 }
             }.start()

@@ -1,17 +1,16 @@
 package com.qpsoft.quest
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.blankj.utilcode.util.CacheDiskStaticUtils
-import com.just.agentweb.AgentWeb
+import com.blankj.utilcode.util.EncodeUtils
 import com.king.zxing.util.CodeUtils
 import com.qpsoft.quest.config.Const
 import com.qpsoft.quest.config.Keys
-import com.qpsoft.quest.server.ServerManager
+import com.qpsoft.quest.util.GzipUtil
 
 class QrCodeActivity : AppCompatActivity() {
 
@@ -31,8 +30,10 @@ class QrCodeActivity : AppCompatActivity() {
             finish()
         }
 
+        val questId = intent.getStringExtra("questId")!!
+        val jsonObj = CacheDiskStaticUtils.getJSONObject(questId)
         val qrCodeIv = findViewById<ImageView>(R.id.iv_qrcode)
-        val qrCodeBitMap = CodeUtils.createQRCode("3333333333333333", 360, null)
+        val qrCodeBitMap = CodeUtils.createQRCode(EncodeUtils.base64Encode2String(GzipUtil.gzip(jsonObj.toString())), 720, null)
         qrCodeIv.setImageBitmap(qrCodeBitMap)
 
         findViewById<TextView>(R.id.tv_go_main).setOnClickListener {
@@ -40,7 +41,8 @@ class QrCodeActivity : AppCompatActivity() {
         }
 
         findViewById<TextView>(R.id.tv_go_edit).setOnClickListener {
-            startActivity(Intent(this@QrCodeActivity, WebActivity::class.java))
+            finish()
+            //startActivity(Intent(this@QrCodeActivity, WebActivity::class.java))
         }
     }
 }

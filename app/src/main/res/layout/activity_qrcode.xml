@@ -1,59 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <include layout="@layout/top"/>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/iv_qrcode"
-            android:layout_width="360dp"
-            android:layout_height="360dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="240dp"
-            android:src="@mipmap/ic_launcher_round" />
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="调查表已提交，请等待老师扫码提交"
-            android:textColor="@color/color_8c"
-            android:textSize="19sp" />
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/iv_qrcode"
+                android:layout_width="360dp"
+                android:layout_height="360dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="240dp"
+                android:src="@mipmap/ic_launcher_round" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true">
-        <TextView
-            android:id="@+id/tv_go_main"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="调查表已提交，请等待老师扫码提交"
+                android:textColor="@color/color_8c"
+                android:textSize="19sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="72dp"
-            android:layout_marginStart="36dp"
-            android:layout_marginEnd="36dp"
-            android:background="@drawable/cb7_bg"
-            android:gravity="center"
-            android:text="返回首页"
-            android:textColor="@color/white"
-            android:textSize="19sp" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true">
+            <TextView
+                android:id="@+id/tv_go_main"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginEnd="36dp"
+                android:background="@drawable/cb7_bg"
+                android:gravity="center"
+                android:text="返回首页"
+                android:textColor="@color/white"
+                android:textSize="19sp" />
 
-        <TextView
-            android:id="@+id/tv_go_edit"
-            android:layout_width="match_parent"
-            android:layout_height="72dp"
-            android:layout_margin="36dp"
-            android:gravity="center"
-            android:text="修改"
-            android:textColor="@color/color_cb7"
-            android:textSize="19sp" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_go_edit"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:layout_margin="36dp"
+                android:gravity="center"
+                android:text="修改"
+                android:textColor="@color/color_cb7"
+                android:textSize="19sp" />
+        </LinearLayout>
+    </RelativeLayout>
 
 
-</RelativeLayout>
+</LinearLayout>

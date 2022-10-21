@@ -25,18 +25,19 @@ class WebActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web)
 
+        val questId = intent.getStringExtra("questId")
         val questType = CacheDiskStaticUtils.getString(Keys.QUEST_TYPE, "")
         val txt = when(questType) {
             "primary" -> {
-                url = "$host/3031?type=3031&schoolCategory=PrimarySchool&schoolYearStart=2022&from=student&questionnaire=1"
+                url = "$host/3031?type=3031&schoolCategory=PrimarySchool&schoolYearStart=2022&from=student&questionnaire=1&questId=$questId"
                 Const.X
             }
             "middle" -> {
-                url = "$host/3031?type=3031&schoolCategory=MiddleSchool&schoolYearStart=2022&from=student&questionnaire=1"
+                url = "$host/3031?type=3031&schoolCategory=MiddleSchool&schoolYearStart=2022&from=student&questionnaire=1&questId=$questId"
                 Const.Z
             }
             "university" -> {
-                url = "$host/3031?type=3031&schoolCategory=University&schoolYearStart=2022&from=student&questionnaire=1"
+                url = "$host/3031?type=3031&schoolCategory=University&schoolYearStart=2022&from=student&questionnaire=1&questId=$questId"
                 Const.D
             }
             else -> ""

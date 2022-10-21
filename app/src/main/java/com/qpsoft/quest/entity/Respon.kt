@@ -1,7 +1,7 @@
 package com.qpsoft.quest.entity
 
-data class Result<T>(
+data class Respon(
     val code: Int,
-    val data: T?,
+    val data: AppVersion?,
     val message: String,
 )

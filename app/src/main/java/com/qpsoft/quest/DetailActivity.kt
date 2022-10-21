@@ -1,5 +1,6 @@
 package com.qpsoft.quest
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
@@ -10,10 +11,19 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
+import com.blankj.utilcode.util.*
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.king.zxing.util.CodeUtils
+import com.qpsoft.quest.config.Keys
 import com.qpsoft.quest.entity.Quest
+import com.qpsoft.quest.util.GzipUtil.gzip
+import org.json.JSONArray
+import org.json.JSONObject
+import java.io.ByteArrayOutputStream
+import java.nio.charset.StandardCharsets.UTF_8
+import java.util.*
+import java.util.zip.GZIPOutputStream
 
 class DetailActivity : AppCompatActivity() {
 
@@ -29,10 +39,13 @@ class DetailActivity : AppCompatActivity() {
         }
 
         val data = mutableListOf<Quest>()
-        data.add(Quest("111111", "2022年全国常见病监测学生调查表（小学版）", "2022年10月15日15时15分04秒", "333333"))
-        data.add(Quest("222222", "2022年全国常见病监测学生调查表（中学版）", "2022年10月15日15时15分04秒", "333333"))
-        data.add(Quest("333333", "2022年全国常见病监测学生调查表（小学版）", "2022年10月15日15时15分04秒", "333333"))
-        data.add(Quest("444444", "2022年全国常见病监测学生调查表（小学版）", "2022年10月15日15时15分04秒", "333333"))
+        val jsonArray = CacheDiskStaticUtils.getJSONArray(Keys.QUEST_LIST)
+        if (jsonArray != null) {
+            val objList = jsonArray.toMutableList().reversed()
+            for (obj in objList) {
+                data.add(GsonUtils.fromJson(obj.toString(), Quest::class.java))
+            }
+        }
 
         val historyRv = findViewById<RecyclerView>(R.id.rv_history)
         historyRv.layoutManager = LinearLayoutManager(this)
@@ -58,6 +71,9 @@ class DetailActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun JSONArray.toMutableList(): MutableList<JSONObject> = MutableList(length(), this::getJSONObject)
+
     private fun showQrCode(quest: Quest) {
         val editDialog = MaterialDialog(this).show {
             customView(R.layout.dialog_qrcode, scrollable = true, noVerticalPadding = false)
@@ -69,7 +85,9 @@ class DetailActivity : AppCompatActivity() {
             editDialog.dismiss()
         }
         val qrCodeIv = rootView.findViewById<ImageView>(R.id.iv_qrcode)
-        val qrCodeBitMap = CodeUtils.createQRCode(quest.data, 360, null)
+        LogUtils.e("--------$quest")
+        //val qrCodeBitMap = CodeUtils.createQRCode(GsonUtils.toJson(quest.toString()), 1000, null)
+        val qrCodeBitMap = CodeUtils.createQRCode(EncodeUtils.base64Encode2String(gzip(quest.toString())), 720, null)
         qrCodeIv.setImageBitmap(qrCodeBitMap)
 
         val txt1Tv = rootView.findViewById<TextView>(R.id.tv_txt1)
@@ -90,6 +108,7 @@ class DetailActivity : AppCompatActivity() {
         }
         rootView.findViewById<TextView>(R.id.tv_ok).setOnClickListener {
             editDialog.dismiss()
+            startActivity(Intent(this@DetailActivity, WebActivity::class.java).putExtra("questId", quest.id))
         }
     }
 }
