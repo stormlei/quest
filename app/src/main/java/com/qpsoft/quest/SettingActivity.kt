@@ -61,8 +61,7 @@ class SettingActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             val versionCode = AppUtils.getAppVersionCode()
-            //val packageName = AppUtils.getAppPackageName()
-            val packageName = "com.a.b"
+            val packageName = AppUtils.getAppPackageName()
             Thread {
                 val res = run("https://central.qpsc365.com/api/public/v1/app/version/latest?package=$packageName&versionCode=$versionCode")
                 LogUtils.e("-----$res")
