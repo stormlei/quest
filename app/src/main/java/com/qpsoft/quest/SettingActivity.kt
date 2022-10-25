@@ -70,6 +70,7 @@ class SettingActivity : AppCompatActivity() {
                     if (respon.code == 0) {
                         val appVersion = respon.data
                         if (appVersion != null )UpdateManager(this, appVersion).checkUpdate()
+                        else ToastUtils.showShort("暂无新版本")
                     }
                 }
             }.start()

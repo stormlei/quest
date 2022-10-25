@@ -58,7 +58,7 @@ class UpdateManager(context: Activity, appVersion: AppVersion) {
             title(text = title)
             message(text = versionInfo)
             cornerRadius(16f)
-            cancelOnTouchOutside(false)
+            cancelOnTouchOutside(true)
             positiveButton(text="后台更新") {
                 DownloadUtil(mContext, downloadUrl).loadFile()
             }
