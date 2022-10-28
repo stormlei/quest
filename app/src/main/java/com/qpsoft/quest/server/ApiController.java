@@ -48,6 +48,7 @@ class ApiController {
         jsonObj.put("tabletNo", CacheDiskStaticUtils.getString(Keys.TABLET_NO, ""));
         jsonObj.put("title", getTitle());
         jsonObj.put("time", getTime());
+        jsonObj.put("fillTime", jsonObject.optString("fillTime"));
         CacheDiskStaticUtils.put(uniqueID, jsonObj);
 
 

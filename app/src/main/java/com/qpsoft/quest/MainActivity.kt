@@ -7,12 +7,10 @@ import android.text.TextUtils
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.blankj.utilcode.util.CacheDiskStaticUtils
-import com.blankj.utilcode.util.LogUtils
-import com.blankj.utilcode.util.ScreenUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.qpsoft.quest.config.Const
 import com.qpsoft.quest.config.Keys
-import com.qpsoft.quest.server.ServerManager
+
 
 class MainActivity : AppCompatActivity() {
 

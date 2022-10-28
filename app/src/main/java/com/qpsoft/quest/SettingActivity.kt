@@ -69,7 +69,7 @@ class SettingActivity : AppCompatActivity() {
                     val respon = GsonUtils.fromJson(res, Respon::class.java)
                     if (respon.code == 0) {
                         val appVersion = respon.data
-                        if (appVersion != null )UpdateManager(this, appVersion).checkUpdate()
+                        if (appVersion != null ) UpdateManager(this, appVersion).checkUpdate()
                         else ToastUtils.showShort("暂无新版本")
                     }
                 }

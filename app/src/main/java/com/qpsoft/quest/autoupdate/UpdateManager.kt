@@ -54,7 +54,7 @@ class UpdateManager(context: Activity, appVersion: AppVersion) {
     }
 
     private fun showNoticeDialogForce() {
-        MaterialDialog(mContext).cancelable(false).show {
+        MaterialDialog(mContext).cancelable(true).show {
             title(text = title)
             message(text = versionInfo)
             cornerRadius(16f)
